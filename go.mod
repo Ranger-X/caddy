@@ -10,6 +10,7 @@ require (
 	github.com/dustin/go-humanize v1.0.1-0.20200219035652-afde56e7acac
 	github.com/go-acme/lego/v3 v3.5.0
 	github.com/golang/groupcache v0.0.0-20200121045136-8c9f03a8e57e
+	github.com/google/cel-go v0.3.2
 	github.com/ilibs/json5 v1.0.1
 	github.com/jsternberg/zap-logfmt v1.2.0
 	github.com/klauspost/compress v1.10.3

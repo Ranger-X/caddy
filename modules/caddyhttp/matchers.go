@@ -28,6 +28,8 @@ import (
 
 	"github.com/caddyserver/caddy/v2"
 	"github.com/caddyserver/caddy/v2/caddyconfig/caddyfile"
+	"github.com/google/cel-go/cel"
+	"github.com/google/cel-go/checker/decls"
 )
 
 type (
@@ -108,8 +110,11 @@ type (
 		Matchers MatcherSet `json:"-"`
 	}
 
-	// MatchTable matches requests by values in the table.
-	MatchTable string // TODO: finish implementing
+	// MatchExpression matches requests by evaluating a CEL expression.
+	MatchExpression struct {
+		Expr string
+		prg  cel.Program
+	}
 )
 
 func init() {
@@ -123,6 +128,7 @@ func init() {
 	caddy.RegisterModule(new(MatchProtocol))
 	caddy.RegisterModule(MatchRemoteIP{})
 	caddy.RegisterModule(MatchNegate{})
+	caddy.RegisterModule(MatchExpression{})
 }
 
 // CaddyModule returns the Caddy module information.
@@ -686,6 +692,70 @@ func (m MatchRemoteIP) Match(r *http.Request) bool {
 		}
 	}
 	return false
+}
+
+// CaddyModule returns the Caddy module information.
+func (MatchExpression) CaddyModule() caddy.ModuleInfo {
+	return caddy.ModuleInfo{
+		ID:  "http.matchers.expression",
+		New: func() caddy.Module { return new(MatchExpression) },
+	}
+}
+
+// MarshalJSON marshals m's expression.
+func (m MatchExpression) MarshalJSON() ([]byte, error) {
+	return json.Marshal(m.Expr)
+}
+
+// UnmarshalJSON unmarshals m's expression.
+func (m *MatchExpression) UnmarshalJSON(data []byte) error {
+	return json.Unmarshal(data, &m.Expr)
+}
+
+// Provision sets ups m.
+func (m *MatchExpression) Provision(_ caddy.Context) error {
+	env, err := cel.NewEnv(
+		cel.Declarations(
+			// TODO: WIP - can we make this work with our existing replacers?
+			decls.NewIdent("path", decls.String, nil),
+			decls.NewIdent("method", decls.String, nil),
+		),
+	)
+	parsed, issues := env.Parse(m.Expr)
+	if issues != nil && issues.Err() != nil {
+		return fmt.Errorf("parsing CEL program: %s", issues.Err())
+	}
+	checked, issues := env.Check(parsed)
+	if issues != nil && issues.Err() != nil {
+		return fmt.Errorf("type-checking CEL program: %s", issues.Err())
+	}
+	m.prg, err = env.Program(checked)
+	if err != nil {
+		return fmt.Errorf("compiling CEL program: %s", err)
+	}
+	return nil
+}
+
+// Match returns true if r matches m.
+func (m MatchExpression) Match(r *http.Request) bool {
+	out, _, _ := m.prg.Eval(map[string]interface{}{
+		// TODO: ideally we'd integrate with replacers here...
+		"path":   r.URL.Path,
+		"method": r.Method,
+	})
+	if outBool, ok := out.Value().(bool); ok {
+		return outBool
+	}
+	return false
+
+}
+
+// UnmarshalCaddyfile implements caddyfile.Unmarshaler.
+func (m *MatchExpression) UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
+	for d.Next() {
+		m.Expr = strings.Join(d.RemainingArgs(), " ")
+	}
+	return nil
 }
 
 // MatchRegexp is an embedable type for matching
