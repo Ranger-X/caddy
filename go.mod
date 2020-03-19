@@ -1,4 +1,4 @@
-module github.com/Ranger-X/caddy
+module github.com/caddyserver/caddy
 
 go 1.13
 
