@@ -40,6 +40,9 @@ type configGroup map[string]*Config
 // This function follows nearly the same logic to lookup
 // a hostname as the getCertificate function uses.
 func (cg configGroup) getConfig(hello *tls.ClientHelloInfo) *Config {
+	log.Printf("[DEBUG] ServerName: %s", hello.ServerName)
+	log.Printf("[DEBUG] hello: %+v", hello)
+
 	name := certmagic.NormalizedName(hello.ServerName)
 	if name == "" {
 		name = certmagic.NormalizedName(certmagic.Default.DefaultServerName)
@@ -53,13 +56,20 @@ func (cg configGroup) getConfig(hello *tls.ClientHelloInfo) *Config {
 		if err == nil {
 			addr = ip
 		}
+
+		log.Printf("[DEBUG] Empty SNI. Try to get TLS config for %s", addr)
+
 		if config, ok := cg[addr]; ok {
+			log.Printf("[DEBUG] Config for %s founded", addr)
 			return config
 		}
+
+		log.Printf("[DEBUG] Config for %s NOT found", addr)
 	}
 
 	// otherwise, try an exact match
 	if config, ok := cg[name]; ok {
+		log.Printf("[DEBUG] Config for %s found by exact match", name)
 		return config
 	}
 
@@ -70,6 +80,7 @@ func (cg configGroup) getConfig(hello *tls.ClientHelloInfo) *Config {
 		labels[i] = "*"
 		candidate := strings.Join(labels, ".")
 		if config, ok := cg[candidate]; ok {
+			log.Printf("[DEBUG] Config for %s found by wildcard (%s) match", name, candidate)
 			return config
 		}
 	}
@@ -79,6 +90,7 @@ func (cg configGroup) getConfig(hello *tls.ClientHelloInfo) *Config {
 	// a specific host, like ":443", when SNI is
 	// a non-empty value
 	if config, ok := cg[""]; ok {
+		log.Printf("[DEBUG] Config for %s found by <no host>", name)
 		return config
 	}
 
