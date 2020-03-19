@@ -25,7 +25,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/caddyserver/caddy/caddytls"
+	"github.com/Ranger-X/caddy/caddytls"
 	"github.com/caddyserver/caddy/telemetry"
 )
 

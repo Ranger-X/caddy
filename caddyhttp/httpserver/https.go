@@ -20,8 +20,8 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/Ranger-X/caddy/caddytls"
 	"github.com/caddyserver/caddy"
-	"github.com/caddyserver/caddy/caddytls"
 	"github.com/mholt/certmagic"
 )
 
