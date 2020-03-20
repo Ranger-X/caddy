@@ -24,4 +24,4 @@ require (
 	gopkg.in/yaml.v2 v2.2.2
 )
 
-replace github.com/mholt/certmagic => github.com/Ranger-X/certmagic tls_debug
+replace github.com/mholt/certmagic => github.com/Ranger-X/certmagic v0.10.3-custom
