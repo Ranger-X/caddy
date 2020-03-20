@@ -13,7 +13,7 @@ require (
 	github.com/klauspost/cpuid v1.2.0
 	github.com/kylelemons/godebug v0.0.0-20170820004349-d65d576e9348 // indirect
 	github.com/lucas-clemente/quic-go v0.13.1
-	github.com/Ranger-X/certmagic v0.10.3.1
+	github.com/Ranger-X/certmagic v0.10.3
 	github.com/naoina/go-stringutil v0.1.0 // indirect
 	github.com/naoina/toml v0.1.1
 	github.com/russross/blackfriday v0.0.0-20170610170232-067529f716f4
