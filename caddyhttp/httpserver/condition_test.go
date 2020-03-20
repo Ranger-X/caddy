@@ -21,7 +21,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/caddyserver/caddy"
+	"github.com/Ranger-X/caddy"
 )
 
 func TestConditions(t *testing.T) {

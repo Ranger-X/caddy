@@ -23,8 +23,8 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/caddyserver/caddy"
-	"github.com/caddyserver/caddy/caddyhttp/httpserver"
+	"github.com/Ranger-X/caddy"
+	"github.com/Ranger-X/caddy/caddyhttp/httpserver"
 )
 
 func init() {
@@ -139,7 +139,7 @@ func (h ErrorHandler) recovery(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Trim file path
-	delim := "/github.com/caddyserver/caddy/"
+	delim := "/github.com/Ranger-X/caddy/"
 	pkgPathPos := strings.Index(file, delim)
 	if pkgPathPos > -1 && len(file) > pkgPathPos+len(delim) {
 		file = file[pkgPathPos+len(delim):]

@@ -29,8 +29,8 @@ import (
 	"text/template"
 	"time"
 
-	"github.com/caddyserver/caddy/caddyhttp/httpserver"
-	"github.com/caddyserver/caddy/caddyhttp/staticfiles"
+	"github.com/Ranger-X/caddy/caddyhttp/httpserver"
+	"github.com/Ranger-X/caddy/caddyhttp/staticfiles"
 	"github.com/dustin/go-humanize"
 )
 

@@ -36,8 +36,8 @@ import (
 
 	"crypto/tls"
 
-	"github.com/caddyserver/caddy/caddyfile"
-	"github.com/caddyserver/caddy/caddyhttp/httpserver"
+	"github.com/Ranger-X/caddy/caddyfile"
+	"github.com/Ranger-X/caddy/caddyhttp/httpserver"
 )
 
 var (
@@ -571,17 +571,17 @@ func parseBlock(c *caddyfile.Dispenser, u *staticUpstream, hasSrv bool) error {
 		u.Timeout = dur
 	case "tls_client":
 		if !c.NextArg() {
-                        return c.ArgErr()
-                }
-                clientCertFile := c.Val()
+			return c.ArgErr()
+		}
+		clientCertFile := c.Val()
 		if !c.NextArg() {
-                        return c.ArgErr()
-                }
-                clientKeyFile := c.Val()
+			return c.ArgErr()
+		}
+		clientKeyFile := c.Val()
 		clientKeyPair, err := tls.LoadX509KeyPair(clientCertFile, clientKeyFile)
-        	if (err != nil) {
-                	return c.Errf("unable to load keypair from certfile:%s keyfile:%s", clientCertFile, clientKeyFile)
-        	}
+		if err != nil {
+			return c.Errf("unable to load keypair from certfile:%s keyfile:%s", clientCertFile, clientKeyFile)
+		}
 		u.ClientKeyPair = &clientKeyPair
 	default:
 		return c.Errf("unknown property '%s'", c.Val())
@@ -664,7 +664,7 @@ func (u *staticUpstream) healthCheck() {
 					return false
 				}
 				// TODO ReadAll will be replaced if deemed necessary
-				//      See https://github.com/caddyserver/caddy/pull/1691
+				//      See https://github.com/Ranger-X/caddy/pull/1691
 				buf, err := ioutil.ReadAll(r.Body)
 				if err != nil {
 					return true

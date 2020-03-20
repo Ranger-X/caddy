@@ -41,7 +41,7 @@ import (
 
 	"golang.org/x/net/http2"
 
-	"github.com/caddyserver/caddy/caddyhttp/httpserver"
+	"github.com/Ranger-X/caddy/caddyhttp/httpserver"
 	"github.com/lucas-clemente/quic-go"
 	"github.com/lucas-clemente/quic-go/http3"
 )
@@ -340,22 +340,21 @@ func (rp *ReverseProxy) UseOwnCACertificates(CaCertPool *x509.CertPool) {
 // UseClientCertificates is used to facilitate HTTPS proxying
 // with locally provided certificate.
 func (rp *ReverseProxy) UseClientCertificates(keyPair *tls.Certificate) {
-        if transport, ok := rp.Transport.(*http.Transport); ok {
-                if transport.TLSClientConfig == nil {
-                        transport.TLSClientConfig = &tls.Config{}
-                }
-                transport.TLSClientConfig.Certificates = []tls.Certificate{ *keyPair }
-                // No http2.ConfigureTransport() here.
-                // For now this is only added in places where
-                // an http.Transport is actually created.
-        } else if transport, ok := rp.Transport.(*http3.RoundTripper); ok {
-                if transport.TLSClientConfig == nil {
-                        transport.TLSClientConfig = &tls.Config{}
-                }
-                transport.TLSClientConfig.Certificates = []tls.Certificate{ *keyPair }
-        }
+	if transport, ok := rp.Transport.(*http.Transport); ok {
+		if transport.TLSClientConfig == nil {
+			transport.TLSClientConfig = &tls.Config{}
+		}
+		transport.TLSClientConfig.Certificates = []tls.Certificate{*keyPair}
+		// No http2.ConfigureTransport() here.
+		// For now this is only added in places where
+		// an http.Transport is actually created.
+	} else if transport, ok := rp.Transport.(*http3.RoundTripper); ok {
+		if transport.TLSClientConfig == nil {
+			transport.TLSClientConfig = &tls.Config{}
+		}
+		transport.TLSClientConfig.Certificates = []tls.Certificate{*keyPair}
+	}
 }
-
 
 // ServeHTTP serves the proxied request to the upstream by performing a roundtrip.
 // It is designed to handle websocket connection upgrades as well.
@@ -535,7 +534,7 @@ func (rp *ReverseProxy) copyResponse(dst io.Writer, src io.Reader) {
 }
 
 // skip these headers if they already exist.
-// see https://github.com/caddyserver/caddy/pull/1112#discussion_r80092582
+// see https://github.com/Ranger-X/caddy/pull/1112#discussion_r80092582
 var skipHeaders = map[string]struct{}{
 	"Content-Type":        {},
 	"Content-Disposition": {},
@@ -549,7 +548,7 @@ func copyHeader(dst, src http.Header) {
 	for k, vv := range src {
 		if _, ok := dst[k]; ok {
 			// skip some predefined headers
-			// see https://github.com/caddyserver/caddy/issues/1086
+			// see https://github.com/Ranger-X/caddy/issues/1086
 			if _, shouldSkip := skipHeaders[k]; shouldSkip {
 				continue
 			}

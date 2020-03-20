@@ -17,7 +17,7 @@ package pprof
 import (
 	"testing"
 
-	"github.com/caddyserver/caddy"
+	"github.com/Ranger-X/caddy"
 )
 
 func TestSetup(t *testing.T) {

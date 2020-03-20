@@ -1,7 +1,7 @@
 package hook
 
 import (
-	"github.com/caddyserver/caddy"
+	"github.com/Ranger-X/caddy"
 )
 
 // Config describes how Hook should be configured and used.

@@ -6,7 +6,7 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/caddyserver/caddy"
+	"github.com/Ranger-X/caddy"
 )
 
 // Hook executes a command.

@@ -30,7 +30,7 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"github.com/caddyserver/caddy/caddyhttp/httpserver"
+	"github.com/Ranger-X/caddy/caddyhttp/httpserver"
 	"github.com/gorilla/websocket"
 )
 

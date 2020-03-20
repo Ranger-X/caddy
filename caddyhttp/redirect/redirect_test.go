@@ -25,7 +25,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/caddyserver/caddy/caddyhttp/httpserver"
+	"github.com/Ranger-X/caddy/caddyhttp/httpserver"
 )
 
 func TestRedirect(t *testing.T) {

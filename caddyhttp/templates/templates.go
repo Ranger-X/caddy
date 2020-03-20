@@ -28,7 +28,7 @@ import (
 	"text/template"
 	"time"
 
-	"github.com/caddyserver/caddy/caddyhttp/httpserver"
+	"github.com/Ranger-X/caddy/caddyhttp/httpserver"
 )
 
 // ServeHTTP implements the httpserver.Handler interface.

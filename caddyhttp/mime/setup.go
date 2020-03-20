@@ -18,8 +18,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/caddyserver/caddy"
-	"github.com/caddyserver/caddy/caddyhttp/httpserver"
+	"github.com/Ranger-X/caddy"
+	"github.com/Ranger-X/caddy/caddyhttp/httpserver"
 )
 
 func init() {

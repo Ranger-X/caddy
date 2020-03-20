@@ -29,8 +29,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/caddyserver/caddy"
-	"github.com/caddyserver/caddy/telemetry"
+	"github.com/Ranger-X/caddy"
+	"github.com/Ranger-X/caddy/telemetry"
 	"github.com/mholt/certmagic"
 )
 
@@ -79,8 +79,8 @@ func setupTLS(c *caddy.Controller) error {
 					CipherSuites:              clientHello.CipherSuites,
 					ExtensionsUnknown:         true, // no extension info... :(
 					CompressionMethodsUnknown: true, // no compression methods... :(
-					Curves:                    clientHello.SupportedCurves,
-					Points:                    clientHello.SupportedPoints,
+					Curves: clientHello.SupportedCurves,
+					Points: clientHello.SupportedPoints,
 					// We also have, but do not yet use: SignatureSchemes, ServerName, and SupportedProtos (ALPN)
 					// because the standard lib parses some extensions, but our MITM detector generally doesn't.
 				}

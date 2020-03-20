@@ -27,11 +27,11 @@ import (
 	"strings"
 	"time"
 
+	"github.com/Ranger-X/caddy"
+	"github.com/Ranger-X/caddy/caddyfile"
+	"github.com/Ranger-X/caddy/caddyhttp/staticfiles"
 	"github.com/Ranger-X/caddy/caddytls"
-	"github.com/caddyserver/caddy"
-	"github.com/caddyserver/caddy/caddyfile"
-	"github.com/caddyserver/caddy/caddyhttp/staticfiles"
-	"github.com/caddyserver/caddy/telemetry"
+	"github.com/Ranger-X/caddy/telemetry"
 	"github.com/mholt/certmagic"
 )
 
@@ -661,7 +661,7 @@ var directives = []string{
 	"ratelimit",    // github.com/xuqingfeng/caddy-rate-limit
 	"recaptcha",    // github.com/defund/caddy-recaptcha
 	"expires",      // github.com/epicagency/caddy-expires
-	"forwardproxy", // github.com/caddyserver/forwardproxy
+	"forwardproxy", // github.com/Ranger-X/forwardproxy
 	"basicauth",
 	"redir",
 	"status",

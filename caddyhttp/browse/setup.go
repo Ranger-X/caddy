@@ -20,9 +20,9 @@ import (
 	"net/http"
 	"text/template"
 
-	"github.com/caddyserver/caddy"
-	"github.com/caddyserver/caddy/caddyhttp/httpserver"
-	"github.com/caddyserver/caddy/caddyhttp/staticfiles"
+	"github.com/Ranger-X/caddy"
+	"github.com/Ranger-X/caddy/caddyhttp/httpserver"
+	"github.com/Ranger-X/caddy/caddyhttp/staticfiles"
 )
 
 func init() {

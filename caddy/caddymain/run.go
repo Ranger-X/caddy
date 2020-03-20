@@ -29,16 +29,16 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/Ranger-X/caddy"
+	"github.com/Ranger-X/caddy/caddyfile"
 	"github.com/Ranger-X/caddy/caddytls"
-	"github.com/caddyserver/caddy"
-	"github.com/caddyserver/caddy/caddyfile"
-	"github.com/caddyserver/caddy/telemetry"
+	"github.com/Ranger-X/caddy/telemetry"
 	"github.com/google/uuid"
 	"github.com/klauspost/cpuid"
 	"github.com/mholt/certmagic"
 	lumberjack "gopkg.in/natefinch/lumberjack.v2"
 
-	_ "github.com/caddyserver/caddy/caddyhttp" // plug in the HTTP server type
+	_ "github.com/Ranger-X/caddy/caddyhttp" // plug in the HTTP server type
 	// This is where other plugins get plugged in (imported)
 )
 
@@ -300,7 +300,7 @@ func getBuildModule() *debug.Module {
 		// preserves caddy a read-only dependency
 		// TODO: track related Go issue: https://github.com/golang/go/issues/29228
 		for _, mod := range bi.Deps {
-			if mod.Path == "github.com/caddyserver/caddy" {
+			if mod.Path == "github.com/Ranger-X/caddy" {
 				return mod
 			}
 		}

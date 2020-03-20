@@ -31,10 +31,10 @@ import (
 	"strings"
 	"time"
 
+	"github.com/Ranger-X/caddy"
+	"github.com/Ranger-X/caddy/caddyhttp/staticfiles"
 	"github.com/Ranger-X/caddy/caddytls"
-	"github.com/caddyserver/caddy"
-	"github.com/caddyserver/caddy/caddyhttp/staticfiles"
-	"github.com/caddyserver/caddy/telemetry"
+	"github.com/Ranger-X/caddy/telemetry"
 	"github.com/lucas-clemente/quic-go/http3"
 )
 
@@ -563,7 +563,7 @@ func (ln tcpKeepAliveListener) Accept() (net.Conn, error) {
 		return nil, err
 	}
 	// OpenBSD has no user-settable per-socket TCP keepalive
-	// https://github.com/caddyserver/caddy/pull/2787
+	// https://github.com/Ranger-X/caddy/pull/2787
 	if runtime.GOOS != "openbsd" {
 		if err = tc.SetKeepAlivePeriod(3 * time.Minute); err != nil {
 			return nil, err

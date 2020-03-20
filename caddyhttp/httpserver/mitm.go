@@ -26,7 +26,7 @@ import (
 	"sync"
 
 	"github.com/Ranger-X/caddy/caddytls"
-	"github.com/caddyserver/caddy/telemetry"
+	"github.com/Ranger-X/caddy/telemetry"
 )
 
 // tlsHandler is a http.Handler that will inject a value
