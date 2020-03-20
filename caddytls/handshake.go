@@ -30,6 +30,16 @@ import (
 // method to get a config by matching its hostname).
 type configGroup map[string]*Config
 
+// check if we have ECDHE-ECDSA-AES256-CBC-SHA (49162) in supported suites
+func haveOldCipher(hello *tls.ClientHelloInfo) bool {
+	for _, val := range hello.CipherSuites {
+		if val == 49162 {
+			return true
+		}
+	}
+	return false
+}
+
 // getConfig gets the config by the first key match for hello.
 // In other words, "sub.foo.bar" will get the config for "*.foo.bar"
 // if that is the closest match. If no match is found, the first
@@ -65,6 +75,14 @@ func (cg configGroup) getConfig(hello *tls.ClientHelloInfo) *Config {
 		}
 
 		log.Printf("[DEBUG] Config for %s NOT found", addr)
+
+		if haveOldCipher(hello) {
+			substituteName := "rt-telephony.salesap.ru"
+
+			log.Printf("[DEBUG] Try to workaround deprecated Java's bug (connect TLS without SNI) and substitute %s as servername", substituteName)
+			hello.ServerName = substituteName
+			name = substituteName
+		}
 	}
 
 	// otherwise, try an exact match
