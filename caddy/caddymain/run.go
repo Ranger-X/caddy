@@ -33,9 +33,9 @@ import (
 	"github.com/Ranger-X/caddy/caddyfile"
 	"github.com/Ranger-X/caddy/caddytls"
 	"github.com/Ranger-X/caddy/telemetry"
+	"github.com/Ranger-X/certmagic"
 	"github.com/google/uuid"
 	"github.com/klauspost/cpuid"
-	"github.com/mholt/certmagic"
 	lumberjack "gopkg.in/natefinch/lumberjack.v2"
 
 	_ "github.com/Ranger-X/caddy/caddyhttp" // plug in the HTTP server type

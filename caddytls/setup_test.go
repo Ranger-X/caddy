@@ -22,8 +22,8 @@ import (
 	"testing"
 
 	"github.com/Ranger-X/caddy"
+	"github.com/Ranger-X/certmagic"
 	"github.com/go-acme/lego/v3/certcrypto"
-	"github.com/mholt/certmagic"
 )
 
 func TestMain(m *testing.M) {

@@ -22,7 +22,7 @@ import (
 	"strings"
 
 	"github.com/Ranger-X/caddy/telemetry"
-	"github.com/mholt/certmagic"
+	"github.com/Ranger-X/certmagic"
 )
 
 // configGroup is a type that keys configs by their hostname

@@ -22,7 +22,7 @@ import (
 
 	"github.com/Ranger-X/caddy"
 	"github.com/Ranger-X/caddy/caddytls"
-	"github.com/mholt/certmagic"
+	"github.com/Ranger-X/certmagic"
 )
 
 func activateHTTPS(cctx caddy.Context) error {

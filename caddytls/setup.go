@@ -31,7 +31,7 @@ import (
 
 	"github.com/Ranger-X/caddy"
 	"github.com/Ranger-X/caddy/telemetry"
-	"github.com/mholt/certmagic"
+	"github.com/Ranger-X/certmagic"
 )
 
 func init() {

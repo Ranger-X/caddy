@@ -34,7 +34,7 @@ import (
 	"os"
 
 	"github.com/Ranger-X/caddy/caddytls"
-	"github.com/mholt/certmagic"
+	"github.com/Ranger-X/certmagic"
 	"github.com/russross/blackfriday"
 )
 
