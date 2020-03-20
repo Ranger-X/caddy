@@ -159,6 +159,7 @@ func (cg configGroup) getConfig(hello *tls.ClientHelloInfo) *Config {
 func (cg configGroup) GetConfigForClient(clientHello *tls.ClientHelloInfo) (*tls.Config, error) {
 	config := cg.getConfig(clientHello)
 	if config != nil {
+		log.Printf("[DEBUG] For ServerName %s found config %+v", clientHello.ServerName, config)
 		return config.tlsConfig, nil
 	}
 	return nil, nil
