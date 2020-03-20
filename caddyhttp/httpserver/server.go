@@ -531,7 +531,7 @@ func (s *Server) outputSiteInfo(isProcessLog bool) {
 			output += " (only accessible on this machine)"
 		}
 		if isProcessLog {
-			log.Printf("[INFO] Serving %s \n", output)
+			log.Printf("[INFO] Zerving %s \n", output)
 		} else {
 			fmt.Println(output)
 		}
