@@ -80,7 +80,7 @@ func (cg configGroup) getConfig(hello *tls.ClientHelloInfo) *Config {
 			substituteName := "rt-telephony.salesap.ru"
 
 			log.Printf("[DEBUG] Try to workaround deprecated Java's bug (connect TLS without SNI) and substitute %s as servername", substituteName)
-			hello.ServerName = substituteName
+			(*hello).ServerName = substituteName
 			name = substituteName
 		}
 	}
